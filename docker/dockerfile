@@ -1,0 +1,8 @@
+FROM amazoncorretto:17-alpine
+RUN mkdir /app/
+RUN mkdir /app/logs/
+RUN mkdir /app/input_files
+RUN mkdir /app/config
+COPY crypto_recommendation_service-1.0.0.jar /app/crypto_recommendation_service.jar
+WORKDIR /app/
+CMD ["java", "-jar", "crypto_recommendation_service.jar"]

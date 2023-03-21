@@ -1,0 +1,1 @@
+docker run --rm -p -d 8080:8080 -v local_path_to_input_files_folder:/app/input_files -v local_path_to_logs_folder:/app/logs -v local_path_to_config_folder:/app/config  crypto_recommendation_service
