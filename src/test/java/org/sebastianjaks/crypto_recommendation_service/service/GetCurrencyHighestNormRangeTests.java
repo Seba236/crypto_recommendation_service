@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sebastianjaks.crypto_recommendation_service.business.CurrencyService;
 import org.sebastianjaks.crypto_recommendation_service.dao.files_storage.CurrencyFileReader;
-import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
-import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.CurrencyData;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.SpotPriceDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyNormalizedRangeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 
-public class GetCurrencyHighestNormRangeTests {
+class GetCurrencyHighestNormRangeTests {
 	
 	/**
 	 * test the service method that should return currency with greatest range for specific day</br>
@@ -33,7 +33,7 @@ public class GetCurrencyHighestNormRangeTests {
 	 * @throws DataNotPresentException
 	 */
 	@Test
-	public void testGetCurrencyHighestNormRange() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
+	void testGetCurrencyHighestNormRange() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
 		CurrencyFileReader currencyFileReader = mock(CurrencyFileReader.class);
 		when(currencyFileReader.readAllCurrencyFiles()).thenReturn(generateTestCurrencies());
 		
@@ -58,7 +58,7 @@ public class GetCurrencyHighestNormRangeTests {
 	 * @throws DataNotPresentException
 	 */
 	@Test
-	public void testGetCurrencyHighestNormRangeNoMatchingData() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
+	void testGetCurrencyHighestNormRangeNoMatchingData() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
 		CurrencyFileReader currencyFileReader = mock(CurrencyFileReader.class);
 		when(currencyFileReader.readAllCurrencyFiles()).thenReturn(generateTestCurrencies());
 		

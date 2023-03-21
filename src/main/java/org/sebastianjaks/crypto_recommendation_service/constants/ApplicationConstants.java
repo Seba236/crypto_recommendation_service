@@ -4,6 +4,10 @@ import java.io.File;
 
 public class ApplicationConstants {
 	
+	private ApplicationConstants() {
+	    throw new IllegalStateException("Utility class");
+	}
+	
 	public static final String PROJECT_ROOT_DIRECTORY = System.getProperty("user.dir");
 	
 	public static final String INPUT_FILES_DIRECTORY = PROJECT_ROOT_DIRECTORY+File.separator+"input_files";

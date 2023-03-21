@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sebastianjaks.crypto_recommendation_service.business.CurrencyService;
 import org.sebastianjaks.crypto_recommendation_service.dao.files_storage.CurrencyFileReader;
-import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
-import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.CurrencyData;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.SpotPriceDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyNormalizedRangeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 
-public class GetCurrenciesOrderByNormTests {
+class GetCurrenciesOrderByNormTests {
 
 	/**
 	 * test the service method that should return list of currencies ordered by range</br>
@@ -30,7 +30,7 @@ public class GetCurrenciesOrderByNormTests {
 	 * @throws ParseException
 	 */
 	@Test
-	public void testGetCurrenciesOrderByNormRange() throws IOException, InvalidSourceDataException, ParseException {
+	void testGetCurrenciesOrderByNormRange() throws IOException, InvalidSourceDataException, ParseException {
 		CurrencyFileReader currencyFileReader = mock(CurrencyFileReader.class);
 		when(currencyFileReader.readAllCurrencyFiles()).thenReturn(generateTestCurrencies());
 		

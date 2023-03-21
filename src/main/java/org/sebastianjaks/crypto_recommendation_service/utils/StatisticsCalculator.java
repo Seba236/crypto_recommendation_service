@@ -2,9 +2,16 @@ package org.sebastianjaks.crypto_recommendation_service.utils;
 
 import java.util.List;
 
-import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.SpotPriceDTO;
 
 public class StatisticsCalculator {
+	
+	
+	private StatisticsCalculator() {
+	    throw new IllegalStateException("Utility class");
+	}
+	
+	
 	
 	/**
 	 * returns normalized range calculated as (maxPrice-minPrice)/minPrice
@@ -24,7 +31,7 @@ public class StatisticsCalculator {
 	 * @return
 	 */
 	public static double calculateNormalizedRange(List<SpotPriceDTO> spotPrices) {
-		if(spotPrices.size()==0)
+		if(spotPrices.isEmpty())
 			return -1;
 		
 		double maxPrice = getMaxPrice(spotPrices);

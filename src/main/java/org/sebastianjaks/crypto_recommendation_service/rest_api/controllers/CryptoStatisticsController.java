@@ -80,7 +80,7 @@ public class CryptoStatisticsController {
 	 * @throws ParseException
 	 */
 	@GetMapping("/get_highest_normalized_range")
-	public CurrencyNormalizedRangeStatisticsDTO getHighestNormalizedRange(@RequestParam(value="day") String day) throws IOException, InvalidSourceDataException, BadHttpParameterException, ParseException, DataNotPresentException{
+	public CurrencyNormalizedRangeStatisticsDTO getHighestNormalizedRange(@RequestParam(value="day") String day) throws IOException, InvalidSourceDataException, BadHttpParameterException, DataNotPresentException{
 		//check day parameter
 		Date dayDate = parametersValidator.validateDayPatternAndConvert(day);
 		//retrieve data

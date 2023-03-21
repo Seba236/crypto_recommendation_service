@@ -14,7 +14,7 @@ public class ParametersValidator {
 	
 	private static final Pattern CURRENCY_NAME_PATTERN = Pattern.compile("[A-Z]{3}");
 	
-	private static final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("yyyy-M-d");
+	private  SimpleDateFormat dayFormatter = new SimpleDateFormat("yyyy-M-d");
 	
 	
 	
@@ -37,7 +37,7 @@ public class ParametersValidator {
 	 */
 	public Date validateDayPatternAndConvert(String day) throws BadHttpParameterException {
 		try {
-			return DAY_FORMATTER.parse(day);
+			return dayFormatter.parse(day);
 		} catch (ParseException e) {
 			throw new BadHttpParameterException("Text not valid as day: "+day);
 		}

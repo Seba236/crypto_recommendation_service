@@ -14,13 +14,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sebastianjaks.crypto_recommendation_service.business.CurrencyService;
 import org.sebastianjaks.crypto_recommendation_service.dao.files_storage.CurrencyFileReader;
-import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
-import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.CurrencyData;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.SpotPriceDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyFourAttributeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 
-public class GetCurrencyStatisticsTests {
+class GetCurrencyStatisticsTests {
 	
 	
 	/**
@@ -32,7 +32,7 @@ public class GetCurrencyStatisticsTests {
 	 * @throws DataNotPresentException
 	 */
 	@Test
-	public void testGetCurrencyStatistics() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
+	void testGetCurrencyStatistics() throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException {
 		CurrencyFileReader currencyFileReader = mock(CurrencyFileReader.class);
 		when(currencyFileReader.readCurrencyFile("BTC")).thenReturn(generateTestCurrency());
 		

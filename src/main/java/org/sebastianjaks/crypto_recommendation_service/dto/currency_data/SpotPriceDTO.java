@@ -1,4 +1,4 @@
-package org.sebastianjaks.crypto_recommendation_service.dto;
+package org.sebastianjaks.crypto_recommendation_service.dto.currency_data;
 
 import java.util.Date;
 

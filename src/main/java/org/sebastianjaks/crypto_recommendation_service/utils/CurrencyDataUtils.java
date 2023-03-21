@@ -1,11 +1,14 @@
 package org.sebastianjaks.crypto_recommendation_service.utils;
 
 import java.util.Date;
-import java.util.stream.Collectors;
 
-import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.CurrencyData;
 
 public class CurrencyDataUtils {
+	
+	private CurrencyDataUtils() {
+	    throw new IllegalStateException("Utility class");
+	}
 	
 	/**
 	 * leaves data that are inside the specified range (start included, end excluded)
@@ -14,7 +17,7 @@ public class CurrencyDataUtils {
 	 * @param rangeEnd
 	 */
 	public static void filterDataByDateRange(CurrencyData currencyData, Date rangeStart, Date rangeEnd) {
-		currencyData.setSpotPrices(currencyData.getSpotPrices().stream().filter(sp->(sp.getDateTime().getTime()>=rangeStart.getTime()) && sp.getDateTime().before(rangeEnd)).collect(Collectors.toList()));
+		currencyData.setSpotPrices(currencyData.getSpotPrices().stream().filter(sp->(sp.getDateTime().getTime()>=rangeStart.getTime()) && sp.getDateTime().before(rangeEnd)).toList());
 	}
 	
 	

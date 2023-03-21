@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.SpotPriceDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 
@@ -47,10 +47,9 @@ public class CurrencyParser {
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(getFile()))){
 			//skip first line
-			br.readLine();
+			String line = br.readLine();
 			
 			//read all other lines
-			String line;
 			while((line=br.readLine())!=null) {
 				//skip possible blank trailing lines
 				if(line.isBlank())

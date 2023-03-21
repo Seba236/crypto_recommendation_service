@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.sebastianjaks.crypto_recommendation_service.dao.files_storage.CurrencyFileReader;
-import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
+import org.sebastianjaks.crypto_recommendation_service.dto.currency_data.CurrencyData;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyFourAttributeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyNormalizedRangeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
@@ -77,15 +77,14 @@ public class CurrencyService {
 		double maxPrice = StatisticsCalculator.getMaxPrice(currencyData.getSpotPrices());
 		double oldestPrice = currencyData.getSpotPrices().get(0).getPrice();
 		double newestPrice = currencyData.getSpotPrices().get(currencyData.getSpotPrices().size()-1).getPrice();
-		CurrencyFourAttributeStatisticsDTO result = new CurrencyFourAttributeStatisticsDTO(currencyName, maxPrice, minPrice, oldestPrice, newestPrice);
 		
-		return result;
+		return new CurrencyFourAttributeStatisticsDTO(currencyName, maxPrice, minPrice, oldestPrice, newestPrice);
 	}
 	
 	
 	
 	/**
-	 * TODO empty data handling
+	 * 
 	 * @param day
 	 * @return
 	 * @throws IOException
@@ -93,7 +92,7 @@ public class CurrencyService {
 	 * @throws ParseException 
 	 * @throws DataNotPresentException 
 	 */
-	public CurrencyNormalizedRangeStatisticsDTO getCurrencyHighestNormRange(Date day) throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException{
+	public CurrencyNormalizedRangeStatisticsDTO getCurrencyHighestNormRange(Date day) throws IOException, InvalidSourceDataException, DataNotPresentException{
 		List<CurrencyNormalizedRangeStatisticsDTO> result = new ArrayList<>();
 		
 		//load all current files
