@@ -1,6 +1,5 @@
 package org.sebastianjaks.crypto_recommendation_service.service;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

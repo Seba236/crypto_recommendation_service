@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
 public class UserRequestCache {
-	
-	private static final int INTERVAL = 60;
-	
-	private static final int LIMIT_PER_INTERVAL = 20;
 	
 	private Map<String, List<Date>> cacheHashmap = new HashMap<>();
 	
+	@Autowired
+	private Environment env;
 	
 	
 	/**
@@ -41,7 +42,7 @@ public class UserRequestCache {
 		records.add(new Date());
 		
 		//check rate limit
-		return records.size()>LIMIT_PER_INTERVAL;
+		return records.size()>Integer.parseInt(env.getProperty("user-request-limit"));
 	}
 
 
@@ -53,7 +54,7 @@ public class UserRequestCache {
 	 */
 	private void removeOldRecords(List<Date> records) {
 		long now = new Date().getTime();
-		long intervalStart = now-1000*INTERVAL;
+		long intervalStart = now-1000*Integer.parseInt(env.getProperty("user-request-limit-interval"));
 		
 		records.removeIf(r-> r.getTime()<intervalStart);
 	}
