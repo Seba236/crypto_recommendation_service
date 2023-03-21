@@ -1,4 +1,4 @@
-package org.sebastianjaks.crypto_recommendation_service.business.parser;
+package org.sebastianjaks.crypto_recommendation_service.dao.files_storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
-import org.sebastianjaks.crypto_recommendation_service.exceptions.CurrencyNotPresentException;
+import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 
 public class CurrencyParser {
@@ -36,12 +36,12 @@ public class CurrencyParser {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws InvalidSourceDataException 
-	 * @throws CurrencyNotPresentException 
+	 * @throws DataNotPresentException 
 	 */
-	public List<SpotPriceDTO> readCurrencyFile() throws IOException, InvalidSourceDataException, CurrencyNotPresentException{
+	public List<SpotPriceDTO> readCurrencyFile() throws IOException, InvalidSourceDataException, DataNotPresentException{
 		
 		if(!getFile().exists())
-			throw new CurrencyNotPresentException();
+			throw new DataNotPresentException();
 		
 		List<SpotPriceDTO> dayPrices = new ArrayList<>();
 		

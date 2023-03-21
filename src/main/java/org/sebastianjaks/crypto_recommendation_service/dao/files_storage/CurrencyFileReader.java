@@ -1,4 +1,4 @@
-package org.sebastianjaks.crypto_recommendation_service.business.parser;
+package org.sebastianjaks.crypto_recommendation_service.dao.files_storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.sebastianjaks.crypto_recommendation_service.constants.ApplicationConstants;
 import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
 import org.sebastianjaks.crypto_recommendation_service.dto.SpotPriceDTO;
-import org.sebastianjaks.crypto_recommendation_service.exceptions.CurrencyNotPresentException;
+import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class CurrencyFileReader {
 	 * @return
 	 * @throws IOException
 	 * @throws InvalidSourceDataException
-	 * @throws CurrencyNotPresentException
+	 * @throws DataNotPresentException
 	 */
 	public List<CurrencyData> readAllCurrencyFiles() throws IOException, InvalidSourceDataException{
 		List<CurrencyData> result = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CurrencyFileReader {
 				List<SpotPriceDTO> spotPrices;
 				try {
 					spotPrices = new CurrencyParser(files[i]).readCurrencyFile();
-				} catch (CurrencyNotPresentException e) {
+				} catch (DataNotPresentException e) {
 					//this exception happens only when the input file is deleted between the finding and parsing the file
 					log.error(e.getMessage(), e);
 					continue;
@@ -66,9 +66,9 @@ public class CurrencyFileReader {
 	 * @return
 	 * @throws IOException
 	 * @throws InvalidSourceDataException - if file is found, but its internal structure is unexpected, or the file contains no data
-	 * @throws CurrencyNotPresentException - if the file is not found
+	 * @throws DataNotPresentException - if the file is not found
 	 */
-	public CurrencyData readCurrencyFile(String currencyName) throws IOException, InvalidSourceDataException, CurrencyNotPresentException {
+	public CurrencyData readCurrencyFile(String currencyName) throws IOException, InvalidSourceDataException, DataNotPresentException {
 		//compose expected file name
 		String fileName = currencyName+"_values.csv";
 		

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.sebastianjaks.crypto_recommendation_service.business.parser.CurrencyFileReader;
+import org.sebastianjaks.crypto_recommendation_service.dao.files_storage.CurrencyFileReader;
 import org.sebastianjaks.crypto_recommendation_service.dto.CurrencyData;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyFourAttributeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyNormalizedRangeStatisticsDTO;
-import org.sebastianjaks.crypto_recommendation_service.exceptions.CurrencyNotPresentException;
+import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 import org.sebastianjaks.crypto_recommendation_service.utils.CurrencyDataUtils;
 import org.sebastianjaks.crypto_recommendation_service.utils.StatisticsCalculator;
@@ -39,7 +39,7 @@ public class CurrencyService {
 	 * @return
 	 * @throws IOException
 	 * @throws InvalidSourceDataException
-	 * @throws CurrencyNotPresentException
+	 * @throws DataNotPresentException
 	 */
 	public List<CurrencyNormalizedRangeStatisticsDTO> getCurrenciesOrderByNormRange() throws IOException, InvalidSourceDataException{
 		List<CurrencyNormalizedRangeStatisticsDTO> result = new ArrayList<>();
@@ -64,11 +64,11 @@ public class CurrencyService {
 	 * 
 	 * @param currencyName
 	 * @return
-	 * @throws CurrencyNotPresentException 
+	 * @throws DataNotPresentException 
 	 * @throws InvalidSourceDataException 
 	 * @throws IOException 
 	 */
-	public CurrencyFourAttributeStatisticsDTO getCurrencyStatistics(String currencyName) throws IOException, InvalidSourceDataException, CurrencyNotPresentException {
+	public CurrencyFourAttributeStatisticsDTO getCurrencyStatistics(String currencyName) throws IOException, InvalidSourceDataException, DataNotPresentException {
 		//load relevant file and throw exception if missing or corrupt
 		CurrencyData currencyData = fileReader.readCurrencyFile(currencyName);
 		
@@ -91,9 +91,9 @@ public class CurrencyService {
 	 * @throws IOException
 	 * @throws InvalidSourceDataException
 	 * @throws ParseException 
-	 * @throws CurrencyNotPresentException 
+	 * @throws DataNotPresentException 
 	 */
-	public CurrencyNormalizedRangeStatisticsDTO getCurrencyHighestNormRange(Date day) throws IOException, InvalidSourceDataException, ParseException, CurrencyNotPresentException{
+	public CurrencyNormalizedRangeStatisticsDTO getCurrencyHighestNormRange(Date day) throws IOException, InvalidSourceDataException, ParseException, DataNotPresentException{
 		List<CurrencyNormalizedRangeStatisticsDTO> result = new ArrayList<>();
 		
 		//load all current files
@@ -118,7 +118,7 @@ public class CurrencyService {
 		
 		//check for missing data
 		if(currencyMaxRange==null || currencyMaxRange.getNormalizedRange()==-1)
-			throw new CurrencyNotPresentException();
+			throw new DataNotPresentException();
 			
 		
 		return currencyMaxRange;

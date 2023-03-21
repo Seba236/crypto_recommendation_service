@@ -9,7 +9,7 @@ import org.sebastianjaks.crypto_recommendation_service.business.CurrencyService;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyFourAttributeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.dto.rest_objects.CurrencyNormalizedRangeStatisticsDTO;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.BadHttpParameterException;
-import org.sebastianjaks.crypto_recommendation_service.exceptions.CurrencyNotPresentException;
+import org.sebastianjaks.crypto_recommendation_service.exceptions.DataNotPresentException;
 import org.sebastianjaks.crypto_recommendation_service.exceptions.InvalidSourceDataException;
 import org.sebastianjaks.crypto_recommendation_service.rest_api.validators.ParametersValidator;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class CryptoStatisticsController {
 	/**
 	 * 
 	 * @return
-	 * @throws CurrencyNotPresentException 
+	 * @throws DataNotPresentException 
 	 * @throws InvalidSourceDataException 
 	 * @throws IOException 
 	 */
@@ -56,11 +56,11 @@ public class CryptoStatisticsController {
 	 * @return
 	 * @throws IOException
 	 * @throws InvalidSourceDataException
-	 * @throws CurrencyNotPresentException
+	 * @throws DataNotPresentException
 	 * @throws BadHttpParameterException
 	 */
 	@GetMapping("/get_statistics_for_currency")
-	public CurrencyFourAttributeStatisticsDTO getStatisticsForCurrency(@RequestParam(value="currency") String currencyName) throws IOException, InvalidSourceDataException, CurrencyNotPresentException, BadHttpParameterException{
+	public CurrencyFourAttributeStatisticsDTO getStatisticsForCurrency(@RequestParam(value="currency") String currencyName) throws IOException, InvalidSourceDataException, DataNotPresentException, BadHttpParameterException{
 		//check currency parameter
 		parametersValidator.validateCurrencyName(currencyName);
 		//retrieve data
@@ -75,12 +75,12 @@ public class CryptoStatisticsController {
 	 * @return
 	 * @throws IOException
 	 * @throws InvalidSourceDataException
-	 * @throws CurrencyNotPresentException
+	 * @throws DataNotPresentException
 	 * @throws BadHttpParameterException
 	 * @throws ParseException
 	 */
 	@GetMapping("/get_highest_normalized_range")
-	public CurrencyNormalizedRangeStatisticsDTO getHighestNormalizedRange(@RequestParam(value="day") String day) throws IOException, InvalidSourceDataException, BadHttpParameterException, ParseException, CurrencyNotPresentException{
+	public CurrencyNormalizedRangeStatisticsDTO getHighestNormalizedRange(@RequestParam(value="day") String day) throws IOException, InvalidSourceDataException, BadHttpParameterException, ParseException, DataNotPresentException{
 		//check day parameter
 		Date dayDate = parametersValidator.validateDayPatternAndConvert(day);
 		//retrieve data
