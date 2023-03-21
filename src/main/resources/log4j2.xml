@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+<Properties>
+     <Property name="log_output_path">${sys:user.dir}${sys:file.separator}logs${sys:file.separator}</Property>
+</Properties>
+<Appenders>
+
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS}  %C{100}:%M:%L - %msg%n"/>
+    </Console>
+    
+    <RollingFile name="LOGFILE_INFO" fileName="${log_output_path}LOG_INFO.txt" filePattern="${log_output_path}LOG_INFO_%d{yyyy-MM-dd}.txt" ignoreExceptions="false">
+        <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %C{100}:%M:%L - %msg%n"/>
+        <Filters>
+        	<LevelRangeFilter minLevel="WARN" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+    	</Filters>
+    	<Policies>
+	        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+	    </Policies>
+	    <DefaultRolloverStrategy>
+	    	<Delete basePath="${log_output_path}" maxDepth="1">
+		      <IfLastModified age="40d" />
+		    </Delete>
+	    </DefaultRolloverStrategy>
+    </RollingFile>
+    
+    <RollingFile name="LOGFILE_ERROR" fileName="${log_output_path}LOG_ERROR.txt" filePattern="${log_output_path}LOG_ERROR_%d{yyyy-MM-dd}.txt" ignoreExceptions="false">
+        <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS}  %C{100}:%M:%L - %msg%n"/>
+        <Filters>
+        	<LevelRangeFilter minLevel="FATAL" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+    	</Filters>
+    	<Policies>
+	        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+	    </Policies>
+	    <DefaultRolloverStrategy>
+	    	<Delete basePath="${log_output_path}" maxDepth="1">
+		      <IfLastModified age="40d" />
+		    </Delete>
+	    </DefaultRolloverStrategy>
+    </RollingFile>
+    
+</Appenders>
+<Loggers>
+
+<!--     <Logger name="cz.pressdata.test_log4j.App" level="debug" additivity="false"> -->
+<!--         <AppenderRef ref="LOGFILE_INFO"/> -->
+<!--         <AppenderRef ref="LOGFILE_ERROR"/> -->
+<!--         <AppenderRef ref="STDOUT"/> -->
+<!--     </Logger> -->
+    <Root level="info">
+		<AppenderRef ref="LOGFILE_INFO"/> 
+   		<AppenderRef ref="LOGFILE_ERROR"/>
+        <AppenderRef ref="STDOUT"/>
+    </Root>
+</Loggers>
+</Configuration>

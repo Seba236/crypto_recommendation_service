@@ -1,0 +1,22 @@
+### general ###
+target/
+HELP.md
+
+# maven wrapper - maybee include in the future#
+.mvn/
+mvnw*
+
+### Eclipse ###
+.settings/
+.classpath
+.project
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Other ###
+input_files/
+logs/
